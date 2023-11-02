@@ -6,5 +6,5 @@ import "flowbite"
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ng1';
+  title = 'YMR Market';
 }
