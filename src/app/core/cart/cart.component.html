@@ -1,0 +1,151 @@
+<div class="grid grid-cols-2 mx-4 my-2 gap-4" *ngIf="productShow.length!=0">
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg col-span-1">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Image</span>
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Product
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Description
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Price
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                    *ngFor="let i of productShow">
+                    <td class="w-32 p-4">
+                        <img src="{{i.thumbnail}}" alt="{{i.title}}">
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        {{i.title}}
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center space-x-3">
+                            {{i.description}}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        ${{i.price}}
+                    </td>
+                    <td class="px-6 py-4">
+                        <button class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                            (click)="removeFromCart(i)">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div
+        class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white col-span-1 h-fit items-center">
+
+        <button aria-current="true" type="button"
+            class="w-full px-4 py-2 font-medium text-white bg-blue-700 border-b border-gray-200 rounded-t-lg cursor-pointer focus:outline-none dark:bg-gray-800 dark:border-gray-600 text-5xl text-center">
+            Total Price
+        </button>
+        <button type="button"
+            class="w-full px-4 py-2 text-2xl text-center border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+            ${{totalAmount}}
+        </button>
+
+        <div class="flex justify-center gap-5">
+
+            <button type="button" class="bg-blue-700 text-white px-5 py-2 rounded-xl m-2" (click)="this.showLogin=true">
+                Checkout Now
+            </button>
+            <button type="button" class="bg-red-700 text-white px-5 py-2 rounded-xl m-2" (click)="emptyList()">
+                Empty the List
+            </button>
+
+        </div>
+        <!-- form -->
+        <div class="grid justify-center m-3" *ngIf="showLogin">
+
+            <div
+                class=" w-full md:w-[500px] max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <form class="space-y-6"  [formGroup]="loginForm">
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h5>
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                            email</label>
+                        <input type="email" formControlName="email" id="email"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="name@company.com" required>
+                    </div>
+                    <div>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >Your
+                            name</label>
+                        <input type="text" formControlName="name" id="name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="name" required>
+                    </div>
+                    <div>
+                        <label for="tel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                            telephone</label>
+                        <input type="tel" formControlName="tel" id="tel"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="telephone" required>
+                    </div>
+                    <div>
+                        <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                            address</label>
+                        <textarea formControlName="address" id="address"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="address" required></textarea>
+                    </div>
+                    <div class="flex gap-4 mx-3">
+
+                    <button type="submit"
+                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" (click)="onSubmit()" [disabled]="this.loginForm.invalid" [routerLink]="['/order']">order</button>
+                    <button type="submit"
+                        class="w-full text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" (click)="cancel()">cancel</button>
+                        
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- warning -->
+<div class="flex justify-center p-8 m-3">
+
+    <div id="alert-additional-content-4"
+        class="md:w-[500px] grid justify-center p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
+        role="alert" *ngIf="productShow.length==0">
+        <div class="flex items-center">
+            <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <h3 class="text-lg font-medium">This is a warning alert</h3>
+        </div>
+        <div class="mt-2 mb-4 text-sm">
+            The Cart Is Empty Please Go To Shop
+        </div>
+        <div class="flex justify-center">
+            <button type="button"
+                class="text-white bg-yellow-800 hover:bg-yellow-900 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-yellow-300 dark:text-gray-800 dark:hover:bg-yellow-400 dark:focus:ring-yellow-800"
+                [routerLink]="['/product']">
+                <ng-icon name="bootstrapCart4"></ng-icon>
+                <span class="mx-2"> go to shop</span>
+            </button>
+
+        </div>
+    </div>
+</div>

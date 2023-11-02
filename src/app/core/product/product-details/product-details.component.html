@@ -1,0 +1,48 @@
+<!-- *ngFor="let i of data?.products" -->
+<div class="m-8 grid grid-cols-2">
+    <div class="grid gap-4 col-span-1">
+        <div class="flex justify-center">
+            <img class="h-auto max-w-full rounded-lg max-h-[400px]" src="{{data.images[3]}}" alt="">
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+            <div>
+                <img class="h-fit max-w-full rounded-lg" src="{{data.images[0]}}" alt="">
+            </div>
+            <div>
+                <img class="h-fit max-w-full rounded-lg" src="{{data.images[1]}}" alt="">
+            </div>
+            <div>
+                <img class="h-fit max-w-full rounded-lg" src="{{data.images[2]}}" alt="">
+            </div>
+
+        </div>
+    </div>
+
+    <div
+        class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white col-span-1 mx-4 h-fit items-center text-center">
+        <button aria-current="true" type="button"
+            class="w-full px-4 py-2 font-medium text-white bg-blue-700 border-b border-gray-200 rounded-t-lg cursor-pointer focus:outline-none dark:bg-gray-800 dark:border-gray-600 text-5xl text-center">
+            ${{data.price}}
+        </button>
+        <button type="button"
+            class="w-full px-4 py-2 font-medium text-left border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+            {{data.title}}
+        </button>
+        <button type="button"
+            class="w-full px-4 py-2 font-medium text-left border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+            {{data.description}}
+        </button>
+        <div class="flex justify-center">
+
+            <button  type="button"
+                class="bg-blue-700 text-white px-5 py-2 rounded-xl m-2" (click)="addToCart(data)" *ngIf="showAdd">
+                add to cart
+            </button>
+            <button  type="button"
+                class="bg-red-700 text-white px-5 py-2 rounded-xl m-2" (click)="removeFromCart(data)" *ngIf="showRemove">
+                Remove From Cart
+            </button>
+        </div>
+    </div>
+
+</div>
